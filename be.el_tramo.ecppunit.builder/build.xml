@@ -1,0 +1,43 @@
+<project default="main">
+	<property file="build.properties"/>
+	<property name="buildDirectory" value="${basedir}/build"/>
+
+	<target name="main" depends="clean">
+		<property name="baseLocation" value="${eclipse.home}"/>
+		<property name="builder" value="${basedir}" />
+		<property name="buildTempFolder" value="${buildDirectory}" />
+		<property name="sourceDirectory" value="${basedir}/.." />
+		<property name="p2.category.definition" value="file:${buildDirectory}/features/be.el_tramo.ecppunit.feature/category.xml"/>
+			
+    	<!-- Set up the build directory -->
+    	<mkdir dir="${buildDirectory}/features"/>
+    	<mkdir dir="${buildDirectory}/plugins"/>
+    	<copy todir="${buildDirectory}/features">
+      		<fileset dir="${sourceDirectory}" includes="*.feature/**/*"/>
+    	</copy>
+    	<copy todir="${buildDirectory}/plugins">
+			<fileset dir="${sourceDirectory}">
+        		<exclude name="**/bin/**/*"/>
+        		<exclude name="**/bin"/>
+        		<exclude name="*.feature/**/*"/>
+        		<exclude name="*.feature"/>
+            	<exclude name="*.builder/**/*"/>
+            	<exclude name="*.builder"/>
+			</fileset>
+    	</copy>
+
+		<ant antfile="${eclipse.pdebuild.scripts}/build.xml"/>
+
+		<!--<move todir="${basedir}">
+			<fileset dir="${buildDirectory}/${buildLabel}" includes="*.zip"/>
+		</move>-->
+
+		<!-- refresh the workspace -->
+		<!--<eclipse.convertPath fileSystemPath="${basedir}" property="resourcePath"/>
+		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite"/>-->
+	</target>
+
+  <target name="clean">
+    <delete dir="${buildDirectory}"/>
+  </target>
+</project>

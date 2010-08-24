@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/be.el_tramo.ecppunit.feature_1.0.0.qualifier.jar" id="be.el_tramo.ecppunit.feature" version="1.0.0.qualifier">
+      <category name="ecppunit"/>
+   </feature>
+   <category-def name="ecppunit" label="ECPPUnit">
+      <description>
+         Eclipse CPPUnit support
+      </description>
+   </category-def>
+</site>
